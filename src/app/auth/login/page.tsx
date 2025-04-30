@@ -1,125 +1,90 @@
-"use client"; 
+"use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+export default function Connexion() {
   const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
 
-    
-    if (!email || !password) {
-      setError("Veuillez remplir tous les champs.");
-      setLoading(false);
-      return;
-    }
+    // Récupérer les informations de l'utilisateur stockées
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-    
-    console.log("Données envoyées:", { email, password });
-
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.log("Erreur de la réponse:", errorData);
-        throw new Error(errorData.message || "Échec de la connexion");
-      }
-
-      const data = await response.json();
-      console.log("Réponse de la connexion réussie:", data);
-      router.push("/accueil"); 
-    } catch (err) {
-      
-      console.error("Erreur lors de la connexion:", err);
-      setError(err instanceof Error ? err.message : "Une erreur est survenue");
-    } finally {
-      setLoading(false);
+    // Vérifier si les informations sont correctes
+    if (formData.email === user.email && formData.password === user.password) {
+      // Rediriger vers une page protégée ou la page d'accueil
+      router.push("/dashboard"); // Remplace "/dashboard" par la page où tu veux rediriger l'utilisateur
+    } else {
+      setError("Email ou mot de passe incorrect");
     }
   };
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen">
-      <div className="hidden md:flex w-full md:w-1/2 bg-blue-600 text-white flex-col justify-center items-center p-8 md:p-16">
-        <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">
+    <div className="flex min-h-screen">
+      {/* Partie gauche */}
+      <div className="w-1/2 bg-blue-600 text-white flex flex-col justify-center items-center p-10">
+        <h1 className="text-4xl font-bold mb-4 text-center">
           Sensibilisation à la Santé Mentale
-        </h2>
-        <p className="text-base md:text-lg text-center max-w-md">
-          La santé mentale est tout aussi importante que la santé physique.
-          Prenez soin de vous, parlez et n'hésitez pas à demander de l'aide.
+        </h1>
+        <p className="text-center text-lg font-semibold">
+          Connectez-vous pour accéder à nos ressources et participer à notre programme.
         </p>
       </div>
 
-      <div className="flex w-full md:w-1/2 justify-center items-center bg-gray-100 py-10 px-4">
-        <div className="w-full max-w-md p-8 md:p-10 bg-white rounded-3xl shadow-2xl">
-          <h1 className="text-2xl md:text-3xl font-bold text-center text-blue-600 mb-4">
+      {/* Partie droite */}
+      <div className="w-1/2 bg-blue-50 flex justify-center items-center">
+        <div className="bg-white shadow-lg rounded-lg p-10 w-full max-w-md">
+          <h2 className="text-2xl font-bold text-blue-700 mb-6 text-center">
             Connexion à Santé.sg
-          </h1>
-
+          </h2>
           {error && (
-            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-sm">
-              {error}
-            </div>
+            <p className="text-red-600 text-sm text-center mb-4">{error}</p>
           )}
-
-          <form className="space-y-5" onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="email"
-                placeholder="Adresse e-mail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-3 md:p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                required
-                disabled={loading}
-              />
-            </div>
-
-            <div>
-              <input
-                type="password"
-                placeholder="Mot de passe"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 md:p-4 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-                required
-                disabled={loading}
-              />
-            </div>
-
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Adresse e-mail"
+              className="w-full px-4 py-3 mb-4 border rounded-md"
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Mot de passe"
+              className="w-full px-4 py-3 mb-6 border rounded-md"
+              required
+            />
             <button
               type="submit"
-              disabled={loading}
-              className={`w-full bg-blue-600 text-white p-3 md:p-4 rounded-lg font-semibold hover:bg-blue-700 transition ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition"
             >
-              {loading ? "Connexion en cours..." : "Se connecter"}
+              Se connecter
             </button>
           </form>
-
-          <div className="mt-6 text-center">
-            <p className="text-gray-500 text-sm md:text-base">
-              Pas encore de compte ?{" "}
-              <Link
-                href="/auth/register"
-                className="text-blue-600 hover:underline font-medium"
-              >
-                Créer un compte
-              </Link>
-            </p>
-          </div>
+          <p className="text-center text-sm mt-4">
+            Pas encore de compte ?{" "}
+            <Link href="/auth/register" className="text-blue-600 underline">
+              Créer un compte
+            </Link>
+          </p>
         </div>
       </div>
     </div>

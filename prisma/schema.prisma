@@ -1,20 +1,16 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "./node_modules/.prisma/client"
 }
 
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
 model User {
   id        Int      @id @default(autoincrement())
-  fullName  String   // Doit être "fullName" si tu l’utilises dans ton code
+  fullName  String
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
 }
-
-prisma/
-.prisma/
-**/prisma/

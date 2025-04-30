@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaChevronDown, FaLightbulb, FaHandsHelping, FaSearch } from 'react-icons/fa';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaChevronDown, FaLightbulb, FaHandsHelping, FaSearch } from "react-icons/fa";
 
 interface Mission {
   id: number;
@@ -19,51 +19,55 @@ const MissionsPage: React.FC = () => {
     {
       id: 1,
       title: "Sensibilisation et éducation",
-      description: "Informer le public sur les enjeux de la santé mentale, déstigmatiser les troubles psychiques et promouvoir une compréhension globale de la santé mentale.",
+      description:
+        "Informer le public sur les enjeux de la santé mentale, déstigmatiser les troubles psychiques et promouvoir une compréhension globale de la santé mentale.",
       actions: [
         "Organiser des ateliers interactifs dans les écoles et entreprises",
         "Créer des campagnes digitales avec des influenceurs spécialisés",
         "Développer une application mobile éducative avec quiz et ressources",
-        "Partenariats avec les médias pour des documentaires et reportages"
+        "Partenariats avec les médias pour des documentaires et reportages",
       ],
-      icon: <FaLightbulb className="text-yellow-500 text-3xl" />
+      icon: <FaLightbulb className="text-yellow-500 text-3xl" />,
     },
     {
       id: 2,
       title: "Prévention et détection précoce",
-      description: "Aider à identifier les signes précoces de troubles mentaux et encourager une prise en charge rapide.",
+      description:
+        "Aider à identifier les signes précoces de troubles mentaux et encourager une prise en charge rapide.",
       actions: [
         "Plateforme de dépistage en ligne avec algorithme intelligent",
         "Formation certifiante pour les professionnels de première ligne",
         "Kits de détection pour les établissements scolaires",
-        "Application de suivi de l'humeur avec alertes personnalisées"
+        "Application de suivi de l'humeur avec alertes personnalisées",
       ],
-      icon: <FaSearch className="text-blue-500 text-3xl" />
+      icon: <FaSearch className="text-blue-500 text-3xl" />,
     },
     {
       id: 3,
       title: "Soutien et accompagnement",
-      description: "Offrir un soutien aux personnes en difficulté et à leurs proches.",
+      description:
+        "Offrir un soutien aux personnes en difficulté et à leurs proches.",
       actions: [
         "Réseau national de bénévoles formés en écoute active",
         "Chatbot intelligent avec orientation vers les bons professionnels",
         "Programme de mentorat par des personnes ayant surmonté des troubles",
-        "Centres d'accueil temporaire avec activités thérapeutiques"
+        "Centres d'accueil temporaire avec activités thérapeutiques",
       ],
-      icon: <FaHandsHelping className="text-green-500 text-3xl" />
+      icon: <FaHandsHelping className="text-green-500 text-3xl" />,
     },
     {
       id: 4,
       title: "Innovation et recherche",
-      description: "Développer de nouvelles approches thérapeutiques et contribuer à la recherche scientifique.",
+      description:
+        "Développer de nouvelles approches thérapeutiques et contribuer à la recherche scientifique.",
       actions: [
         "Financement de projets de recherche interdisciplinaires",
         "Laboratoire d'innovation en santé mentale digitale",
         "Partenariats avec les startups de healthtech",
-        "Observatoire des tendances et besoins émergents"
+        "Observatoire des tendances et besoins émergents",
       ],
-      icon: <FaLightbulb className="text-purple-500 text-3xl" />
-    }
+      icon: <FaLightbulb className="text-purple-500 text-3xl" />,
+    },
   ];
 
   const toggleMission = (id: number) => {
@@ -71,7 +75,7 @@ const MissionsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-8 px-4 sm:px-6 lg:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Header avec animation */}
         <motion.div
@@ -96,23 +100,21 @@ const MissionsPage: React.FC = () => {
                 key={mission.id}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.5 }}
                 className="bg-white rounded-2xl shadow-xl overflow-hidden"
               >
-                <div 
+                <div
                   className="p-6 cursor-pointer flex items-start"
                   onClick={() => toggleMission(mission.id)}
                 >
-                  <div className="mr-4 mt-1">
-                    {mission.icon}
-                  </div>
+                  <div className="mr-4 mt-1">{mission.icon}</div>
                   <div className="flex-1">
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">{mission.title}</h2>
                     <p className="text-gray-600 mb-4">{mission.description}</p>
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium text-blue-600">
-                        {expandedMission === mission.id ? 'Voir moins' : 'Voir les actions'}
+                        {expandedMission === mission.id ? "Voir moins" : "Voir les actions"}
                       </span>
                       <motion.div
                         animate={{ rotate: expandedMission === mission.id ? 180 : 0 }}
@@ -127,9 +129,9 @@ const MissionsPage: React.FC = () => {
                   {expandedMission === mission.id && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
+                      animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.4 }}
                       className="px-6 pb-6"
                     >
                       <ul className="space-y-3">

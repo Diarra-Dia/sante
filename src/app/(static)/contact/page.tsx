@@ -41,10 +41,10 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row mt-16">
+    <div className="min-h-screen flex flex-col md:flex-row flex-wrap mt-16">
       {/* Section gauche */}
       <div className="w-full md:w-1/2 bg-blue-600 flex items-center justify-center p-8">
-        <div className="text-white text-center">
+        <div className="text-white text-center max-w-md">
           <h1 className="text-3xl sm:text-4xl font-bold mb-4">Contactez-nous</h1>
           <p className="text-lg sm:text-xl">
             Nous sommes là pour vous aider. N'hésitez pas à nous contacter pour toute question ou
@@ -54,9 +54,9 @@ const ContactPage: React.FC = () => {
       </div>
 
       {/* Section droite */}
-      <div className="w-full md:w-1/2 bg-gray-100 flex items-center justify-center p-8">
+      <div className="w-full md:w-1/2 bg-gray-100 flex items-center justify-center p-6 sm:p-8">
         <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-6 sm:p-8 shadow-md rounded-lg">
-          <h2 className="text-2xl font-bold text-blue-600 mb-6">Formulaire de contact</h2>
+          <h2 className="text-2xl font-bold text-blue-600 mb-6 text-center">Formulaire de contact</h2>
 
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-700 font-medium mb-2">
@@ -112,7 +112,7 @@ const ContactPage: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 text-base font-semibold"
           >
             Envoyer
           </button>
