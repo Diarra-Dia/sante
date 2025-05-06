@@ -7,6 +7,7 @@ import Image from 'next/image';
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const toggleMenu = () => setMenuOpen(!menuOpen);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <nav className="bg-blue-600 p-4 flex items-center justify-between relative z-50">
@@ -60,15 +61,16 @@ export default function Navbar() {
       {menuOpen && (
         <div className="fixed top-0 left-0 w-full h-screen bg-blue-600 md:hidden z-50 p-4 overflow-y-auto">
           <ul className="flex flex-col space-y-4 mt-10">
-            <li><Link href="/accueil" className="text-white font-bold">Accueil</Link></li>
-            <li><Link href="/blog" className="text-white font-bold">Blog</Link></li>
-            <li><Link href="/ressources" className="text-white font-bold">Ressources</Link></li>
-            <li><Link href="/contact" className="text-white font-bold">Contact</Link></li>
-            <li><Link href="/quiz" className="text-white font-bold">Nos missions</Link></li>
-            <li><Link href="/traitement" className="text-white font-bold">Traitement</Link></li>
+            <li><Link href="/accueil" onClick={closeMenu} className="text-white font-bold">Accueil</Link></li>
+            <li><Link href="/blog" onClick={closeMenu} className="text-white font-bold">Blog</Link></li>
+            <li><Link href="/ressources" onClick={closeMenu} className="text-white font-bold">Ressources</Link></li>
+            <li><Link href="/contact" onClick={closeMenu} className="text-white font-bold">Contact</Link></li>
+            <li><Link href="/quiz" onClick={closeMenu} className="text-white font-bold">Nos missions</Link></li>
+            <li><Link href="/traitement" onClick={closeMenu} className="text-white font-bold">Traitement</Link></li>
             <li>
               <Link
                 href="/auth/login"
+                onClick={closeMenu}
                 className="block mt-4 bg-white text-blue-600 text-center py-2 rounded font-semibold hover:bg-gray-100"
               >
                 Connexion
