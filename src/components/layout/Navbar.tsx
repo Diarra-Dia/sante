@@ -59,8 +59,8 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="fixed top-0 left-0 w-full h-screen bg-blue-600 md:hidden z-50 p-4 overflow-y-auto">
-          <ul className="flex flex-col space-y-4 mt-10">
+        <div className="absolute top-16 right-4 w-64 bg-blue-600 rounded-lg shadow-lg z-50 p-4">
+          <ul className="flex flex-col space-y-4">
             <li><Link href="/accueil" onClick={closeMenu} className="text-white font-bold">Accueil</Link></li>
             <li><Link href="/blog" onClick={closeMenu} className="text-white font-bold">Blog</Link></li>
             <li><Link href="/ressources" onClick={closeMenu} className="text-white font-bold">Ressources</Link></li>
@@ -71,7 +71,7 @@ export default function Navbar() {
               <Link
                 href="/auth/login"
                 onClick={closeMenu}
-                className="block mt-4 bg-white text-blue-600 text-center py-2 rounded font-semibold hover:bg-gray-100"
+                className="block mt-2 bg-white text-blue-600 text-center py-2 rounded font-semibold hover:bg-gray-100"
               >
                 Connexion
               </Link>
@@ -82,3 +82,4 @@ export default function Navbar() {
     </nav>
   );
 }
+ 
