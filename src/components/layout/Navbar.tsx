@@ -6,11 +6,10 @@ import Image from 'next/image';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <nav className="bg-blue-600 p-4 flex items-center justify-between relative">
+    <nav className="bg-blue-600 p-4 flex items-center justify-between relative z-50">
       {/* Logo */}
       <div className="flex items-center space-x-3">
         <Image
@@ -20,7 +19,7 @@ export default function Navbar() {
           height={30}
           className="rounded-lg"
         />
-        <span className="text-white text-xl font-bold"></span>
+        <span className="text-white text-xl font-bold">Santé</span>
       </div>
 
       {/* Menu Desktop */}
@@ -33,7 +32,7 @@ export default function Navbar() {
         <li><Link href="/traitement" className="text-white font-bold hover:underline">Traitement</Link></li>
       </ul>
 
-      
+      {/* Connexion Desktop */}
       <div className="hidden md:flex items-center">
         <Link
           href="/auth/login"
@@ -50,29 +49,31 @@ export default function Navbar() {
           className="text-white focus:outline-none"
         >
           {menuOpen ? (
-            <span className="text-2xl">✖</span> // Croix pour fermer
+            <span className="text-2xl">✖</span>
           ) : (
-            <span className="text-2xl">☰</span> // Hamburger
+            <span className="text-2xl">☰</span>
           )}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-blue-600 shadow-md md:hidden z-50">
-          <ul className="flex flex-col space-y-2 p-4">
+        <div className="fixed top-0 left-0 w-full h-screen bg-blue-600 md:hidden z-50 p-4 overflow-y-auto">
+          <ul className="flex flex-col space-y-4 mt-10">
             <li><Link href="/accueil" className="text-white font-bold">Accueil</Link></li>
             <li><Link href="/blog" className="text-white font-bold">Blog</Link></li>
             <li><Link href="/ressources" className="text-white font-bold">Ressources</Link></li>
             <li><Link href="/contact" className="text-white font-bold">Contact</Link></li>
             <li><Link href="/quiz" className="text-white font-bold">Nos missions</Link></li>
             <li><Link href="/traitement" className="text-white font-bold">Traitement</Link></li>
-            <Link
-              href="/auth/login"
-              className="block mt-2 bg-white text-blue-600 text-center py-2 rounded font-semibold hover:bg-gray-100"
-            >
-              Connexion
-            </Link>
+            <li>
+              <Link
+                href="/auth/login"
+                className="block mt-4 bg-white text-blue-600 text-center py-2 rounded font-semibold hover:bg-gray-100"
+              >
+                Connexion
+              </Link>
+            </li>
           </ul>
         </div>
       )}
