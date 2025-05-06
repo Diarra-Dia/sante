@@ -1,10 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
+    
       <section className="relative bg-gradient-to-r from-blue-500 text-white py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row items-center gap-12">
@@ -35,7 +36,7 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-white/10 backdrop-blur-sm"></div>
       </section>
 
-      {/* Key Benefits */}
+  
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
